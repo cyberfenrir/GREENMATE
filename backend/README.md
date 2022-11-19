@@ -28,3 +28,16 @@ pip install django djangorestframework
 python manage.py runserver
 ```
 >Note: Might have to run `python manage.py migrate` and restart server. Check CLI output for instructions.
+
+## Additional Info: 
+
+To create a superuser/admin, run:
+```bash
+python manage.py createsuperuser
+```
+access admin dashboard at `localhost:8000/admin`
+
+To create a django project (not necessary for this project, already done)
+```bash
+django-admin startproject backend ##(backend=name of project)
+```
