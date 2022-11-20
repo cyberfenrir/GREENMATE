@@ -50,3 +50,21 @@
 .productscreen-content{
     padding: 20px;
 }
+
+.load-spin{
+    height: 100px;
+    width: 100px;
+    margin:'auto';
+    display: block;
+}
+
+.product-image{
+    height: 163px;
+    width: 163px;
+}
+
+.product-text{
+    white-space:  normal; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
