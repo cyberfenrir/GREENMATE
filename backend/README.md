@@ -21,10 +21,16 @@ virtualenv denv
 ```bash
 .\denv\Scripts\activate
 ```
-4. Install required dependencies in activated env
+4. Install required dependencies in activated env inside `backend` directory
+
+Recommend Method: 
 
 ```bash
-pip install django djangorestframework pillow django-cors-headers
+pip install -r requirements.txt
+```
+OR, you can do:
+```bash
+pip install django djangorestframework pillow django-cors-headers djangorestframework-simplejwt
 ```
 5. To run the dev server, run: 
 ```bash
@@ -39,7 +45,7 @@ To create a superuser/admin, run:
 ```bash
 python manage.py createsuperuser
 ```
-access admin dashboard at `localhost:8000/admin`
+Access admin dashboard at `localhost:8000/admin`
 
 To create a django project (not necessary for this project, already done)
 ```bash
