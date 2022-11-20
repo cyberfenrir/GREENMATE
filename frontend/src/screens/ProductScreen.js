@@ -1,21 +1,31 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, Routes, Route, useParams } from 'react-router-dom'
 import { Row, Col, Image, ListGroup, Button, Card } from 'react-bootstrap'
 import Rating from '../components/Rating'
-import products from '../products'
+
 import '../app.css'
+import axios from 'axios'
 
 function ProductScreen(props) {  
-  let {id} = useParams()
-  const product = products.find((p) => p._id == id)
-  // console.log(product.image)
+   let {id} = useParams()
+  const [product, setProduct] = useState([]);
+
+  useEffect(()=>{
+     async function fetchProduct(){
+      const {data} = await axios.get(`http://127.0.0.1:8000/api/products/${id}`)
+      setProduct(data)
+    }
+
+    fetchProduct()
+    
+  },[] )
   
     return (
     <div>
       <Link to ='/Home' className = 'btn btn-light my-3'>Go Back</Link>
       <Row>
         <Col md={6}>
-            <img src = {`.${product.image}`} alt = {product.name} fluid />
+            <img src = {`${product.image}`} alt = {product.name} fluid />
         </Col>
         <Col md={3}>
           <ListGroup variant = "flush">
@@ -61,7 +71,7 @@ function ProductScreen(props) {
                 </ListGroup.Item>
 
                 <ListGroup.Item>
-                  <Button className='btn-block button-fill' disabled={product.countInStock==0} type='button'>Add to Cart</Button>
+                  <Button className='btn-block button-fill' disabled={product.countInStock===0} type='button'>Add to Cart</Button>
                 </ListGroup.Item>
               </ListGroup>
 
