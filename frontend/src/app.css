@@ -41,4 +41,12 @@
     padding: 10px;
     width: 100%;
 }
-      
+
+.productscreen-img{
+    width: 400px;
+    height: 400px;
+}
+
+.productscreen-content{
+    padding: 20px;
+}
