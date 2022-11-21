@@ -5,6 +5,12 @@ main{
     margin: 0.1 rem;
 }
 
-#GreenMate{
-    color:6A983C;
+h1{
+    font-size: 1.8rem;
+    padding: 2rem 0;
+}
+
+h2{
+    font-size: 1.4rem;
+    padding: 0.5rem 0;
 }

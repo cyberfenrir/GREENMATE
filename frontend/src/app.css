@@ -63,8 +63,18 @@
     width: 163px;
 }
 
-.product-text{
+.product-text {
     white-space:  normal; 
     overflow: hidden;
     text-overflow: ellipsis; 
 }
+
+.center-quantity {
+    position: relative;
+}
+
+.center-quantity p {
+    margin: 0;
+    position: absolute;
+    top: 50%;                         
+    transform: translate(0, -50%) };

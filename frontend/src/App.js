@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 
 import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
+import CartScreen from './screens/CartScreen'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import LandingScreen from './screens/LandingScreen'
@@ -18,6 +19,8 @@ function App() {
             <Route path='/' exact element = { <LandingScreen /> }/>
             <Route path='/Home' exact element={<HomeScreen />} />
             <Route path='/Product/:id' element={<ProductScreen />} />
+            <Route path='/cart/:id' element={<CartScreen />} />
+            <Route path="cart" element={<CartScreen />} />
           </Routes>
         </Container>
       </main>
