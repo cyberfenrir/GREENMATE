@@ -78,3 +78,7 @@
     position: absolute;
     top: 50%;                         
     transform: translate(0, -50%) };
+
+.login-button {
+    padding-top: auto;
+}

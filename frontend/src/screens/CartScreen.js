@@ -15,8 +15,7 @@ function CartScreen(match, Location) {
   let {id} = useParams()
   const location = useLocation()
   const qty = location.search ? location.search.split('=')[1] : 1
-//   console.log(qty)
-//   console.log(id)
+
   
   const dispatch = useDispatch()
 
@@ -27,13 +26,14 @@ function CartScreen(match, Location) {
 
   useEffect(()=>{
     if(id){
-        dispatch(addToCart(id, qty))
+        dispatch(addToCart(id, Number(qty)))
     }
   },[dispatch, id, qty])
 
   const removeFromCartHandler = (id) => {dispatch(removeFromCart(id))}
 
   const checkoutHandler = () => {navigate('/login?redirect=shipping')}
+
 
   return (
     <Row>
