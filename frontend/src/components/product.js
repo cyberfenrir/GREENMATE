@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button'
 import Rating from './Rating'
 import { Link } from 'react-router-dom'
+
 import '../app.css'
 function Product({ product }) {
   return (
@@ -26,7 +27,8 @@ function Product({ product }) {
             <Card.Text>
               <h5 className='text-center'>INR {product.price}</h5>
             </Card.Text>
-            <Button variant="outline-success" className='my-3 p-3'>Buy</Button>
+            <Button variant="outline-success" className='my-3 p-3'><Link style={{textDecoration: 'none'}} to={ `/product/${product._id}` }> Buy  </Link></Button>
+           
     </Card>
   )
 }
