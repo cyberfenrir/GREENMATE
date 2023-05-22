@@ -2,10 +2,11 @@ from django.shortcuts import render
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from base.permissions import IsSellerUser
 from rest_framework.response import Response
 
 
-from base.models import Product, Review
+from base.models import Product, Review, Seller
 from base.serializers import ProductSerializer
 
 from rest_framework import status
@@ -26,26 +27,37 @@ def getProduct(request, pk):
 
 
 @api_view(['POST'])
-@permission_classes([IsAdminUser])
+@permission_classes([IsSellerUser])
 def createProduct(request):
     user = request.user
+    data = request.data
+
+    seller_name = data['seller_name']
+    try:
+        seller = Seller.objects.get(user=user, companyName=seller_name)
+    except Seller.DoesNotExist:
+        return Response({'detail': 'Seller not found'}, status=400)
 
     product = Product.objects.create(
         user=user,
-        name='Sample Name',
-        price=0,
-        brand='Sample Brand',
-        countInStock=0,
-        category='Sample Category',
-        description=''
+        seller=seller,
+        name=data['name'],
+        image = data['image'], # doesnt work
+        price=data['price'],
+        brand=data['brand'],
+        countInStock=data['countInStock'],
+        category=data['category'],
+        description=data['description']
     )
+
+    # product.save()
 
     serializer = ProductSerializer(product, many=False)
     return Response(serializer.data)
 
 
 @api_view(['PUT'])
-@permission_classes([IsAdminUser])
+@permission_classes([IsSellerUser,IsAdminUser])
 def updateProduct(request, pk):
     data = request.data
     product = Product.objects.get(_id=pk)
@@ -64,7 +76,7 @@ def updateProduct(request, pk):
 
 
 @api_view(['DELETE'])
-@permission_classes([IsAdminUser])
+@permission_classes([IsSellerUser,IsAdminUser])
 def deleteProduct(request, pk):
     product = Product.objects.get(_id=pk)
     product.delete()

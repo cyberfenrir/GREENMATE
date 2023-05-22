@@ -9,6 +9,10 @@ import CartScreen from './screens/CartScreen'
 import LoginScreen from './screens/LoginScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import ProfileScreen from './screens/ProfileScreen'
+import ShippingScreen from './screens/ShippingScreen'
+import PaymentScreen from './screens/PaymentScreen'
+import PlaceOrderScreen from './screens/PlaceOrderScreen'
+import OrderScreen from './screens/OrderScreen'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import LandingScreen from './screens/LandingScreen'
@@ -32,7 +36,15 @@ function App() {
             <Route path="/login" element={<LoginScreen />} />
             <Route path='/register' element={<RegisterScreen/>} />
             <Route path='/profile' element={<ProfileScreen />} />
+            <Route path='/shipping' element={<ShippingScreen />} />
+            <Route path='/payment' element={<PaymentScreen />} />
+            {/* <Route path='/order/:id' element={<OrderScreen />} /> */}
+            <Route path='/placeorder' element={<PlaceOrderScreen />} />
+            <Route path='/order/:id' element={ <OrderScreen/> }/>
             <Route path="/learn" element={<LearnScreen />} />
+            <Route path ="/login/shipping" element = {<ShippingScreen/>}/>
+
+
             <Route path="/learn/1" element={<Blog01/>} />
             <Route path="/learn/2" element={<Blog02/>} />
             <Route path="/learn/3" element={<Blog03/>} />

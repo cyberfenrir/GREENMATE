@@ -27,6 +27,9 @@ function Product({ product }) {
             <Card.Text>
               <h5 className='text-center'>INR {product.price}</h5>
             </Card.Text>
+            {/* <Card.Title as="div">
+                  <strong className='text-center product-text'>Sold By: {product.seller_name}</strong>
+                </Card.Title> */}
             <Button variant="outline-success" className='my-3 p-3'><Link style={{textDecoration: 'none'}} to={ `/product/${product._id}` }> Buy  </Link></Button>
            
     </Card>

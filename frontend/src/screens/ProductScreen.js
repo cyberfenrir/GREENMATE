@@ -82,6 +82,10 @@ const addToCartHandler = () =>{
                   </ListGroup.Item>
 
                   <ListGroup.Item>
+                    Sold By: {product.seller_name}
+                  </ListGroup.Item>
+
+                  <ListGroup.Item>
                     Description: {product.description}
                   </ListGroup.Item>
 

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import Product, Order, OrderItem, ShippingAddress, Review
+from .models import Product, Order, OrderItem, ShippingAddress, Review, Seller
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -38,6 +38,30 @@ class UserSerializerWithToken(UserSerializer):
         token = RefreshToken.for_user(obj)
         return str(token.access_token)
 
+class SellerSerializer(serializers.ModelSerializer):
+    username = serializers.CharField()
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
+    token = serializers.SerializerMethodField(read_only=True)
+
+    class Meta:
+        model = Seller
+        fields = ['_id', 'username', 'email', 'password', 'companyName', 'isSeller', 'token']
+
+    def get_token(self, obj):
+        refresh = RefreshToken.for_user(obj.user)
+        return str(refresh.access_token)
+    
+    def create(self, validated_data):
+        user_data = {
+            'username': validated_data.pop('username'),
+            'email': validated_data.pop('email'),
+            'password': validated_data.pop('password')
+        }
+        user = User.objects.create_user(**user_data)
+        seller = Seller.objects.create(user=user, **validated_data)
+        return seller
+
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
@@ -47,10 +71,11 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 class ProductSerializer(serializers.ModelSerializer):
     reviews = serializers.SerializerMethodField(read_only=True)
+    seller_name = serializers.CharField(source='seller.companyName', read_only=True)
 
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ['_id', 'reviews', 'name', 'image', 'category', 'description', 'rating', 'numReviews', 'price', 'countInStock', 'createdAt', 'user', 'seller', 'seller_name']
 
     def get_reviews(self, obj):
         reviews = obj.review_set.all()
